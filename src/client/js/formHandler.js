@@ -1,3 +1,4 @@
+import { featchMeaningCloudApi } from "./meaningCloud";
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -7,9 +8,9 @@ async function handleSubmit(event) {
 
   console.log("::: Form Submitted :::");
   fetch("http://localhost:8081/apiKey")
-    .then((res) => res.json())
     .then((res) => {
       console.log(res);
+    .then((res) => res.json())
       const formdata = new FormData();
       formdata.append("key", res.key);
       if (r.test(formText)) {
@@ -25,8 +26,8 @@ async function handleSubmit(event) {
         body: formdata,
         redirect: "follow",
       };
-
-      return fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
+      console.log(requestOptions);
+      return featchMeaningCloudApi(requestOptions)
         .then((response) => response.json())
         .then((res) => {
           document.getElementById("model").innerHTML = `model: ${res.model}`;
