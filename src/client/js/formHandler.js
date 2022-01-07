@@ -7,14 +7,9 @@ async function handleSubmit(event) {
   let expression =
     /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
   let regexp = new RegExp(expression);
-  console.log(regexp.test(formText));
+  // console.log(regexp.test(formText));
   if (regexp.test(formText)) {
-    var tag = document.createElement("p");
-    var text = document.createTextNode("This is not a Valid url");
-    tag.appendChild(text);
-    var element = document.getElementById("url");
-    element.appendChild(tag);
-
+    const formdata = new FormData();
     formdata.append("url", formText);
 
     formdata.append("lang", "en"); // 2-letter code, like en es fr ...
@@ -24,7 +19,6 @@ async function handleSubmit(event) {
         console.log(res);
       })
       .then((res) => res.json());
-    const formdata = new FormData();
 
     const requestOptions = {
       method: "POST",
