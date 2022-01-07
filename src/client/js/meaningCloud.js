@@ -2,6 +2,7 @@ async function fetchMeaningCloudApi(options) {
   return fetch("https://api.meaningcloud.com/sentiment-2.1", options)
     .then((response) => response.json())
     .then((res) => {
+      console.log(res);
       document.getElementById("model").innerHTML = `model: ${res.model}`;
       document.getElementById(
         "agree"

@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const { GenerateSW } = require("workbox-webpack-plugin");
+// const { GenerateSW } = require("workbox-webpack-plugin");
 module.exports = {
   entry: "./src/client/index.js",
   mode: "production",
@@ -27,7 +27,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        // loader: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        loader: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -46,6 +47,6 @@ module.exports = {
       protectWebpackAssets: false,
     }),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
-    new GenerateSW(),
+    //  new GenerateSW(),
   ],
 };
