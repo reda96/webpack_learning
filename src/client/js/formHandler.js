@@ -18,22 +18,28 @@ async function handleSubmit(event) {
     formdata.append("url", formText);
 
     formdata.append("lang", "en"); // 2-letter code, like en es fr ...
-  }
-  console.log("::: Form Submitted :::");
-  fetch("http://localhost:8081/apiKey")
-    .then((res) => {
-      console.log(res);
-    })
-    .then((res) => res.json());
-  const formdata = new FormData();
+    console.log("::: Form Submitted :::");
+    fetch("http://localhost:8081/apiKey")
+      .then((res) => {
+        console.log(res);
+      })
+      .then((res) => res.json());
+    const formdata = new FormData();
 
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow",
-  };
-  console.log(requestOptions);
-  return fetchMeaningCloudApi(requestOptions);
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    console.log(requestOptions);
+    return fetchMeaningCloudApi(requestOptions);
+  } else {
+    var tag = document.createElement("p");
+    var text = document.createTextNode("This is not a Valid url");
+    tag.appendChild(text);
+    var element = document.getElementById("url");
+    element.appendChild(tag);
+  }
 }
 
 export { handleSubmit };
