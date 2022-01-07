@@ -1,5 +1,6 @@
 var path = require("path");
 const express = require("express");
+const cors = require("cors");
 const mockAPIResponse = require("./mockAPI.js");
 // You could call it aylienapi, or anything else
 const dotenv = require("dotenv");
@@ -9,6 +10,7 @@ console.log(`Your API key is ${process.env.API_KEY}`);
 const app = express();
 
 app.use(express.static("dist"));
+app.use(cors());
 
 app.get("/", function (req, res) {
   res.sendFile("dist/index.html");
@@ -20,6 +22,10 @@ app.get("/", function (req, res) {
 //   res.send(mockAPIResponse);
 // });
 app.get("/apiKey", function (req, res) {
+  res.set({
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  });
   res.send({ key: process.env.API_KEY });
 });
 // designates what port the app will listen to for incoming requests

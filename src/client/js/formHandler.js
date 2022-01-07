@@ -10,23 +10,26 @@ async function handleSubmit(event) {
   // console.log(regexp.test(formText));
   if (regexp.test(formText)) {
     const formdata = new FormData();
-    formdata.append("url", formText);
+    console.log(formText);
 
-    formdata.append("lang", "en"); // 2-letter code, like en es fr ...
     console.log("::: Form Submitted :::");
     fetch("http://localhost:8081/apiKey")
+      .then((res) => res.json())
       .then((res) => {
         console.log(res);
-      })
-      .then((res) => res.json());
+        const formdata = new FormData();
+        formdata.append("key", res.key);
+        formdata.append("url", formText);
 
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
-    console.log(requestOptions);
-    return fetchMeaningCloudApi(requestOptions);
+        formdata.append("lang", "en"); // 2-letter code, like en es fr ...
+        const requestOptions = {
+          method: "POST",
+          body: formdata,
+          redirect: "follow",
+        };
+        console.log(requestOptions);
+        return fetchMeaningCloudApi(requestOptions);
+      });
   } else {
     var tag = document.createElement("p");
     var text = document.createTextNode("This is not a Valid url");
