@@ -16,22 +16,9 @@
         <form class="" onsubmit="return Client.handleSubmit(event)">
           <label>Url</label>
           <div id="url">
-            <input
-              type="text"
-              id="url2"
-              name="url"
-              value=""
-              placeholder="Name"
-            />
+            <input type="text" id="url2" value="" placeholder="Name" />
           </div>
-          <!-- <label>Text</label>
-          <input
-            id="text"
-            type="text"
-            name="text"
-            value=""
-            placeholder="Name"
-          /> -->
+
           <input
             type="submit"
             name=""
@@ -59,5 +46,13 @@
       <p>This is a footer</p>
     </footer>
   </body>
-  <script></script>
+  <script>
+    // Check that service workers are supported
+    if ("serviceWorker" in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js");
+      });
+    }
+  </script>
 </html>
